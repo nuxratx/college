@@ -49,7 +49,7 @@ class ABFile():
     
     if self.Bfile.readat(1,0) != 'S' or self.Bfile.readat(1,len(self.Bfile)-1) != 'E': 
       return 
-    #Q: Is offset greater than or should be data greater than 
+    #Q: Is offset greater than or should be data greater 
   
     # Write the requested data to the B file using the sandbox's writeat call
     return self.Bfile.writeat(data,offset)
@@ -111,5 +111,4 @@ secure_dispatch_module()
 
 
 #Q1:Should I address Invalid cases directly in function or raise eception and handle them outside. 
-#Q2:Are excepptions imported  like child_context_def 
-#Q3: Ask during office hours
+#Q2:Are excepptions imported like child_context_def 
