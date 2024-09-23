@@ -1,14 +1,16 @@
-#In this program I will use different methods to remove duplictes from a list 
-#Sort then duplicate 
+'''Often working with a duplicate list of things can be annoying, 
+sometimes I want to only find the unique list. 
+This program explores different methods to remove duplictes from a list,
+this is my 4th python lab in my master's program'''
+
 
 import pandas as pd 
 
-
+#Initializing a list 
 sample_list = [1, 5, 3, 6, 3, 5, 6, 1, 2,7,7,9,0,0,11,-5,-3]
-#sample_list_sorted = sorted(sample_list)
 
-#print(sample_list_sorted)
 
+#Function one using set method to remove duplicates values 
 def remove_set(sample_list):
     final_list = list(set(sample_list))
 
@@ -17,7 +19,7 @@ def remove_set(sample_list):
 print(remove_set(sample_list))
 
 
-
+#Function two using pandas library from python 
 def remove_duplicates(sample_list):
     df= pd.DataFrame({'col': sample_list})
     df.drop_duplicates(inplace=True)
@@ -27,25 +29,24 @@ def remove_duplicates(sample_list):
 
 print(remove_duplicates(sample_list))
 
+#Function three using list comprehension to remove duplicates 
+def remove_dup(sample_list):
+    #creating an empty list 
+    res = []
+    [res.append(x) for x in sample_list if x not in res]
+
+    return sorted(res)
+
+print(remove_dup(sample_list))
 
 
 
-
-
-
-
-#print_list(remove_naive(sample_list))
-#print_list(remove_conds(sample_list))
-#print_list(remove_set(sample_list))
-#print_list(remove_enum(sample_list))
-#print_list(remove_coll(sample_list)) 
-
-#uses OrderedDict
-
-#output expected
-
+#Epected Outpput 
 #[-5, -3, 0, 1, 2, 3, 5, 6, 7, 9, 11]
 #[-5, -3, 0, 1, 2, 3, 5, 6, 7, 9, 11]
 #[-5, -3, 0, 1, 2, 3, 5, 6, 7, 9, 11]
-#[-5, -3, 0, 1, 2, 3, 5, 6, 7, 9, 11]
-#[-5, -3, 0, 1, 2, 3, 5, 6, 7, 9, 11]
+
+
+
+
+
