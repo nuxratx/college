@@ -30,7 +30,7 @@ def webServer(port=13331):
     try:
       message = connectionSocket.recv(4096)#Fill in start -a client is sending you a message   #Fill in end 
       filename = message.split()[1]   #what data format does that come in, is your file trying to be
-      strfile = filename.decode('utf-8')[1:]
+      strfile = filename.decode('utf-8')[1:] # converting the file to read as normal text and we take the second element of tha 
       
       #opens the client requested file. 
       #Plenty of guidance online on how to open and read a file in python. How should you read it though if you plan on sending it through a socket? open a folder in python 
@@ -44,7 +44,7 @@ def webServer(port=13331):
       #Fill in start 
               
       #Content-Type is an example on how to send a header as bytes. There are more!
-      outputdata2 = b'HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=UTF-8\r\nConnection: close\r\nServer: Socketserver\r\n\r\n' + bytes(outputdata,'utf-8')  #Missing header line use the RFC in the link , status line 
+      outputdata2 = b'HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=UTF-8\r\nConnection: close\r\nServer: Socketserver\r\n\r\n' + bytes(outputdata,'utf-8') #sending http header information to network console on debug 
       
 
       #Note that a complete header must end with a blank line, creating the four-byte sequence "\r\n\r\n" Refer to https://w3.cs.jmu.edu/kirkpams/OpenCSF/Books/csf/html/TCPSockets.html
