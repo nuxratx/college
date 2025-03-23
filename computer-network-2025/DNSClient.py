@@ -1,16 +1,3 @@
-""" 
-A test client is a program that sends requests to a server, and the ‘test part’ is us verifying that the responses are correct. 
-In the context of a DNS server, a test client sends DNS queries to the server and checks that the responses contain the expected 
-IP addresses. In this case, we will query our local DNS server and a Public DNS server to see if the responses are the same!
-The provided code is an example of a simple test client written in Python using the dnspython library. 
-This library provides both high- and low-level access to DNS. The high-level classes perform queries for data of a given name, type, and class, and return an answer set.
-
-Dependencies to install: 
-
-import cryptography 
-import ipaddress
-import dnspython
-"""
 
 import dns.resolver
 # Set the IP address of the local DNS server and a public DNS server
@@ -46,10 +33,10 @@ def compare_dns_servers(domainList,question_type):
         public_ip_address = query_dns_server(domain_name,question_type)
         if local_ip_address != public_ip_address:
             return False
-    return True    
+    return True
     
 # Define a function to print the results from querying both the local and public DNS servers for each domain name in the domainList
-def local_external_DNS_output(question_type):    
+def local_external_DNS_output(question_type):
     print("Local DNS Server")
     for domain_name in domainList:
         ip_address = (domain_name,question_type)
