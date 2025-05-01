@@ -8,7 +8,7 @@ import struct
         # 3. Kurose/Ross Book!
 
 def dns_query(type, name, server):
-    # Create a UDP socket => all UDP is set to port 53
+    # Create a UDP socket
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     server_address = (server, 53) # Enter Port Number
 
@@ -81,8 +81,8 @@ def dns_query(type, name, server):
         # 3. edu (length of 3)
         
     qname_parts = name.split('.') # How can we easily split the string?
-    qname_encoded_parts = [struct.pack('B', len(part)) + part.encode('ascii') for part in qname_parts] # Make sure it's encoded as a sequence of the right character encoding type (lowercase)
-    qname_encoded = b''.join(qname_encoded_parts) + b'\x00' # Enter the closing byte value to signify the end of the domain string (two digits)
+    qname_encoded_parts = [struct.pack('B', len(part)) + part.encode('utf-8') for part in qname_parts] # Make sure it's encoded as a sequence of the right character encoding type (lowercase)
+    qname_encoded = b''.join(qname_encoded_parts) + b'\x00' #enter the closing byte value to signify the end of the domain string (two digits)
 
     # Encode the QTYPE and QCLASS
 
@@ -150,16 +150,16 @@ def dns_query(type, name, server):
         rdata = response_answer[offset:offset+rdlength]
         offset += rdlength
 
-        if type == 1: # Lookup Type value
+        if type == 'A': # Lookup Type value
             # A record (IPv4 address)
             ipv4 = socket.inet_ntop(socket.AF_INET, rdata)
             print(f'{name} has IPv4 address {ipv4}')
             return ipv4
-        elif type == 28: # Lookup Type value
+        elif type == 'AAAA': # Lookup Type value
             # AAAA record (IPv6 address)
             ipv6 = socket.inet_ntop(socket.AF_INET6, rdata)
             print(f'{name} has IPv6 address {ipv6}')
-            return ipv6                
+            return ipv6
 
 def parse_name(data, offset):
     name_parts = []
