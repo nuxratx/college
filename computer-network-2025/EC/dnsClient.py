@@ -81,7 +81,7 @@ def dns_query(type, name, server):
         # 3. edu (length of 3)
         
     qname_parts = name.split('.') # How can we easily split the string?
-    qname_encoded_parts = [struct.pack('B', len(part)) + part.encode('utf-8') for part in qname_parts] # Make sure it's encoded as a sequence of the right character encoding type (lowercase)
+    qname_encoded_parts = [struct.pack('B', len(part)) + part.encode() for part in qname_parts] # Make sure it's encoded as a sequence of the right character encoding type (lowercase)
     qname_encoded = b''.join(qname_encoded_parts) + b'\x00' #enter the closing byte value to signify the end of the domain string (two digits)
 
     # Encode the QTYPE and QCLASS
